@@ -6,30 +6,63 @@ namespace InfixParser
 {
 	public class InfixEvaluator
 	{
+		public InfixEvaluator(string infix)
+		{
+			Result = Evaluate(infix);
+		}
+
+		public enum ResultType
+		{
+			None,
+			Success,
+			InvalidToken,
+			InvalidInfix
+		}
+
+		public ResultType Result
+		{
+			get;
+			private set;
+		}
+
+		public List<Token> Tokens
+		{
+			get;
+			private set;
+		}
+
+		public double ResultValue
+		{
+			get;
+			private set;
+		}
+
 		/// <summary>
 		/// Evaluate infix expression (given as string)
 		/// </summary>
 		/// <param name="infix">infix expression</param>
 		/// <returns>result of infix (null if failed)</returns>
-		internal static double? Evaluate(string infix)
+		private ResultType Evaluate(string infix)
 		{
 			// split infix into tokens
-			List<Token> tokens = TokenParser.ParseTokens(infix);
-			if (tokens == null)
+			if (!TokenParser.TryParseTokens(infix, out var tokens))
 			{
 				Debug.WriteLine("Invalid token found in infix");
-				return null;
+				return ResultType.InvalidToken;
 			}
+
+			Tokens = tokens;
 
 			try
 			{
 				Queue<Token> queue = InfixToPostfixConverter.ConvertInfixToPostfix(tokens);
-				return PostfixProcessor.ProcessPostfix(queue);
+				ResultValue = PostfixProcessor.ProcessPostfix(queue);
+				return ResultType.Success;
 			}
 			catch (ArgumentException e)
 			{
 				Debug.WriteLine("Invalid postfix: " + e.Message);
-				return null;
+				return ResultType.InvalidInfix;
 			}
 		}
 	}

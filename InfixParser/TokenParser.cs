@@ -14,7 +14,7 @@ namespace InfixParser
 		/// <param name="str">String object containing expression</param>
 		/// <returns>A list of Tokens if all text in expression has been matched,
 		/// otherwise will return null if there is text that is not a valid token</returns>
-		public static List<Token> ParseTokens(string str)
+		public static bool TryParseTokens(string str, out List<Token> tokensOut)
 		{
 			string regex_number = @"(?<number>(\d+)\.?(\d*)) + ### match number
 									(?!.*\])";
@@ -41,7 +41,8 @@ namespace InfixParser
 				tokens.Add(token);
 			}
 
-			return tokens;
+			tokensOut = tokens;
+			return true;
 		}
 	}
 }
