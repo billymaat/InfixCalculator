@@ -1,11 +1,14 @@
 ﻿<Application x:Class="InfixCalculator.WPF.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:InfixCalculator.WPF" xmlns:vm="clr-namespace:InfixCalculator.WPF.ViewModel"
+             xmlns:local="clr-namespace:InfixCalculator.WPF" 
+             xmlns:vm="clr-namespace:InfixCalculator.WPF.ViewModel" 
+             xmlns:valueconverters="clr-namespace:InfixCalculator.WPF.ValueConverters"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator"/>
+            <valueconverters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

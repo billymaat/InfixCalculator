@@ -13,6 +13,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--input grid-->
@@ -30,7 +31,15 @@
                     Content="Calculate"
                     Command="{Binding CalculateCommand}"
                     CommandParameter="{Binding InfixText}"/>
-            <TextBlock Grid.Row="2"
+            <Grid Grid.Row="2" Visibility="{Binding PostFixText, Converter={StaticResource NullToVisibilityConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Postfix:"/>
+                <TextBlock Grid.Column="1" Text="{Binding PostFixText}"/>
+            </Grid>
+            <TextBlock Grid.Row="3"
                        Text="{Binding InfixResult}"/>
         </Grid>
     </Grid>

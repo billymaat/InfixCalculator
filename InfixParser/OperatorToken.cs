@@ -26,8 +26,15 @@ namespace InfixParser
 			set;
 		}
 
+		public char Operator
+		{
+			get;
+			private set;
+		}
+
 		public OperatorToken(char op)
 		{
+			Operator = op;
 			switch (op)
 			{
 				case '+':
@@ -50,6 +57,11 @@ namespace InfixParser
 		public override TokenType TokenType
 		{
 			get { return TokenType.Operator; }
+		}
+
+		public override string ToString()
+		{
+			return Operator.ToString();
 		}
 	}
 }

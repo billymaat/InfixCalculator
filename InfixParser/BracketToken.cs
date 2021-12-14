@@ -23,8 +23,15 @@ namespace InfixParser
 			private set;
 		}
 		
+		public Char Bracket
+		{
+			get;
+			private set;
+		}
+
 		public BracketToken(char bracket) : base()
 		{
+			Bracket = bracket;
 			switch (bracket)
 			{
 				case '(':
@@ -48,6 +55,11 @@ namespace InfixParser
 				default:
 					return false;
 			}
+		}
+
+		public override string ToString()
+		{
+			return Bracket.ToString();
 		}
 
 	}

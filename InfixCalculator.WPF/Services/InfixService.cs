@@ -2,6 +2,7 @@
 using InfixParser;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using static InfixParser.InfixEvaluator;
 
@@ -26,11 +27,13 @@ namespace InfixCalculator.WPF.Services
 		public InfixOutput Calculate(string infix)
 		{
 			InfixEvaluator evaluator = new InfixEvaluator(infix);
-
 			var infixOutput = new InfixOutput()
 			{
 				Result = evaluator.Result,
-				Output = evaluator.ResultValue
+				Output = evaluator.ResultValue,
+				PostFixText = (evaluator.Result == ResultType.Success)
+					? evaluator.PostFixTokens.Select(o => o.ToString()).Aggregate((i, j) => $"{i} {j}")
+					: null
 			};
 
 			return infixOutput;

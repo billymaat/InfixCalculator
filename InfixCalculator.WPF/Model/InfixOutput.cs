@@ -7,11 +7,6 @@ namespace InfixCalculator.WPF.Model
 {
 	public class InfixOutput
 	{
-		public InfixOutput()
-		{
-
-		}
-
 		public double Output
 		{
 			get;
@@ -19,6 +14,12 @@ namespace InfixCalculator.WPF.Model
 		}
 
 		public ResultType Result
+		{
+			get;
+			set;
+		}
+
+		public string PostFixText
 		{
 			get;
 			set;

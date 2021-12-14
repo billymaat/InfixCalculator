@@ -20,5 +20,10 @@ namespace InfixParser
 		{
 			get { return TokenType.Numeric; }
 		}
+
+		public override string ToString()
+		{
+			return NumericValue.ToString();
+		}
 	}
 }

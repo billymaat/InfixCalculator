@@ -25,7 +25,13 @@ namespace InfixParser
 			private set;
 		}
 
-		public List<Token> Tokens
+		public List<Token> InfixTokens
+		{
+			get;
+			private set;
+		}
+
+		public IEnumerable<Token> PostFixTokens
 		{
 			get;
 			private set;
@@ -51,12 +57,14 @@ namespace InfixParser
 				return ResultType.InvalidToken;
 			}
 
-			Tokens = tokens;
+			InfixTokens = tokens;
 
 			try
 			{
 				Queue<Token> queue = InfixToPostfixConverter.ConvertInfixToPostfix(tokens);
+				PostFixTokens = new List<Token>(queue);
 				ResultValue = PostfixProcessor.ProcessPostfix(queue);
+
 				return ResultType.Success;
 			}
 			catch (ArgumentException e)
